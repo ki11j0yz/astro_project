@@ -1,0 +1,87 @@
+---
+
+---
+
+<nav id="nav">
+    <div class="logo">
+        <img
+            src="images/pcdglogo-transparent.png"
+            alt="Personal Care Dental Group"
+        />
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    <ul id="nav-menu">
+        <li><a href="#" class="close-menu-link">Meet Our Team</a></li>
+        <li><a href="#" class="close-menu-link">Services</a></li>
+        <li class="nav-dropdown">
+            <a href="#" id="patient-info-link"
+                >Patient Information <span id="dropdown-arrow">▾</span></a
+            >
+            <ul class="dropdown-menu">
+                <li><a href="#">Patient Forms</a></li>
+                <li><a href="#">Financial</a></li>
+                <li>
+                    <a
+                        href="https://patient.operadds.com/Account/Login"
+                        target="_blank">Patient Portal</a>
+                </li>
+            </ul>
+        </li>
+        <li><a href="#" class="cta close-menu-link">Contact Us</a></li>
+    </ul>
+</nav>
+
+<script>
+    // Hamburger and Menu elements
+    const hamburger = document.getElementById("hamburger");
+    const navMenu = document.getElementById("nav-menu");
+    const nav = document.getElementById("nav");
+    const patientInfoLink = document.getElementById("patient-info-link");
+
+    // Close navigation menu
+    function closeMenu() {
+        hamburger?.classList.remove("open");
+        navMenu?.classList.remove("open");
+        const openDropdown = document.querySelector(".dropdown-menu.open");
+        if (openDropdown) openDropdown.classList.remove("open");
+    }
+
+    // Toggle mobile menu
+    hamburger?.addEventListener("click", () => {
+        hamburger.classList.toggle("open");
+        navMenu?.classList.toggle("open");
+    });
+
+    // Attach close triggers to links
+    document.querySelectorAll(".close-menu-link").forEach((link) => {
+        link.addEventListener("click", closeMenu);
+    });
+
+    // Dropdown on mobile
+    patientInfoLink?.addEventListener("click", function (e) {
+        e.preventDefault();
+        if (window.innerWidth <= 768) {
+            const menu = document.querySelector(".dropdown-menu");
+            const arrow = document.getElementById("dropdown-arrow");
+            if (menu && arrow) {
+                const isOpen = menu.classList.contains("open");
+                if (isOpen) {
+                    menu.classList.remove("open");
+                    arrow.textContent = "▾";
+                } else {
+                    menu.classList.add("open");
+                    arrow.textContent = "▴";
+                }
+            }
+        }
+    });
+
+    // Nav scroll layout transition
+    window.addEventListener("scroll", () => {
+        nav?.classList.toggle("scrolled", window.scrollY > 60);
+    });
+</script>
